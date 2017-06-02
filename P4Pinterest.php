@@ -9,6 +9,6 @@ $_FILES['pik']['error'] // error code, make it possible to see if file has been 
 if(!empty($_FILES)){
     $message = "_FILES EST REMPLI";
     $image_name = $_FILES ["image_1"]["name"];
-    $image_type = $_FILES ["image_1"]["type"];
+    $_FILES ["image_1"]["type"];
 }
 ?>
