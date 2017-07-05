@@ -1,6 +1,13 @@
 <?php
-$upDir = "./assets/uploads"
+$upDir = "./assets/uploads";
 
+if(isset($_POST["submit"])){
+$filePath = $upDir . basename($_FILES["pik"]["name"]);
+$uploadOk = 1;
+$imgExt = pathinfo($upDir, PATHINFO_EXTENSION);
+
+
+}
 ?>
 
 
@@ -14,10 +21,9 @@ $upDir = "./assets/uploads"
 </head>
 <body>
     
-    <form method="post" action="P4Pinterest.php" enctype="multipart/form-data">
+    <form method="POST" action="P4Pinterest.php" enctype="multipart/form-data">
 
         <label for="pik">Image to upload :</label><br />
-        <input type="hidden" name="MAX_FILE_SIZE" value="1048576" />
         <input type="file" name="pik" id="pik" /><br />
 
         <label for="description">File description :</label><br />
