@@ -1,5 +1,5 @@
 <?php
-if(isset($_FILES["pik"])){
+if(isset($_POST["submit"])){
     $err = array();
     $Fname = $_FILES["pik"]["name"];
     $Fsize = $_FILES["pik"]["type"];
