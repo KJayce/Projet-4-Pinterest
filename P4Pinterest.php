@@ -1,13 +1,31 @@
 <?php
-$upDir = "./assets/uploads";
+if(isset($_FILES["pik"])){
+    $err = array();
+    $Fname = $_FILES["pik"]["name"];
+    $Fsize = $_FILES["pik"]["type"];
+    $Ftmp = $_FILES["pik"]["tmp_name"];
+    $Ftype = $_FILES["pik"]["type"];
+    $Fext = strtolower(end(explode('.', $_FILES["image"]["name"])));
 
-if(isset($_POST["submit"])){
-$filePath = $upDir . basename($_FILES["pik"]["name"]);
-$uploadOk = 1;
-$imgExt = pathinfo($upDir, PATHINFO_EXTENSION);
+    $ext = array("jpeg", "jpg", "png");
 
+    if(in_array($Fext, $ext) === false){
+        $err[] = "extension not allowed, please choose a JPEG, JPG or PNG file.";
+    }
 
+    if($Fsize > 4097152){
+        $err = "file exceeding size limit, please choose a file of 4MB or less.";
+    }
+
+    if(empty($err)== true){
+        move_uploaded_file($Ftmp,"assets/uploads/".$Fname);
+        echo "File upload was successful!";
+    }else{
+        print_r($err);
+    }
 }
+
+
 ?>
 
 
@@ -29,6 +47,12 @@ $imgExt = pathinfo($upDir, PATHINFO_EXTENSION);
         <label for="description">File description :</label><br />
         <textarea name="description" id="description"></textarea><br />
         <button type="submit"> Upload File </button>
+
+        <ul>
+            <li>Sent file: <?php echo $_FILES["pik"]["name"] ?>²</li>
+            <li>File Size: <?php echo $_FILES["pik"]["size"] ?></li>
+            <li>File type: <?php echo $_FILES["pik"]["type"] ?></li>
+        </ul>
 
     </form>
 
